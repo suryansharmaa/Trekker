@@ -28,12 +28,11 @@ export const fetchLeetCodeStats = async (username) => {
         }, {
             headers: {
                 'Content-Type': 'application/json',
-                'Referer': 'https://leetcode.com' // Sometimes required by public GraphQL APIs
+                'Referer': 'https://leetcode.com'
             }
         });
 
         if (response.data.errors) {
-            console.error("GraphQL Errors:", response.data.errors);
             throw new Error(`Leetcode user not found or private profile: ${username}`);
         }
 
@@ -59,11 +58,10 @@ export const fetchLeetCodeStats = async (username) => {
             mediumSolved,
             hardSolved,
             totalSolved,
-            rating: null // Leetcode GraphQL public endpoint doesn't easily expose contest rating without auth/complex queries
+            rating: null
         };
 
     } catch (error) {
-        console.error(`Error fetching LeetCode stats for ${username}:`, error.message);
         throw error;
     }
 };

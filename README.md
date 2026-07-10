@@ -1,63 +1,44 @@
-# DSA & Competitive Programming Portfolio Dashboard
+# Trekker - Competitive Programming Dashboard
 
-A full-stack web application designed to act as a centralized hub for aggregating, visualizing, and analyzing algorithmic problem-solving progress across multiple platforms (LeetCode, Codeforces, GeeksForGeeks). 
+Trekker is a MERN stack application designed for aggregating and analyzing competitive programming performance metrics across LeetCode, Codeforces, and GeeksForGeeks. 
 
-Built with the MERN stack (MongoDB, Express, React, Node.js) and styled with Tailwind CSS, utilizing a custom IntelliJ IDEA Dark (Darcula) theme.
+The application utilizes a distributed architecture with a React-based frontend and a Node.js/Express backend. Data is sourced concurrently via public GraphQL endpoints, REST APIs, and fallback DOM scraping, aggregated into a unified schema, and cached in MongoDB.
 
-## Features
-*   **Platform Integrations:** Fetches profile data, contest ratings, and total solved problem counts.
-*   **Data Aggregation Engine:** Unified MongoDB schema standardizing problem difficulty.
-*   **Milestone Tracker:** Interactive React component tracking the journey approaching 400 solved questions.
-*   **Algorithm Visualizer:** Interactive Merge Sort visualizer demonstrating computer science fundamentals natively in the browser.
+## Architecture & Technology Stack
+- **Frontend**: React, Vite, Tailwind CSS, Recharts
+- **Backend**: Node.js, Express
+- **Database**: MongoDB (Mongoose ORM)
+- **Deployment**: Monorepo structured for independent builds (Frontend via Netlify, Backend via Render)
 
-## Prerequisites
-*   Node.js (v18+ recommended)
-*   MongoDB Instance (Local or MongoDB Atlas)
+## Core Capabilities
+- **Concurrent Data Aggregation**: Leverages `Promise.allSettled` to execute multi-platform data fetching, normalizing platform-specific schemas into a standard difficulty model.
+- **Caching Mechanism**: Implements a caching layer to minimize external API rate-limiting and reduce latency on recurring dashboard loads.
+- **Data Visualization**: Real-time component rendering using Recharts to visualize milestone progression.
+- **Algorithm Visualization**: Includes a native browser implementation of the Merge Sort algorithm for algorithmic demonstration.
 
-## Setup Instructions
+## Local Development
 
-### 1. Database Configuration
-1.  Navigate to the `backend` directory.
-2.  Create a file named `.env` in the root of the `backend` directory.
-3.  Add your MongoDB connection string to the `.env` file:
+### Requirements
+- Node.js (v18+)
+- MongoDB Instance
+
+### Backend Environment Setup
+1. Navigate to the `backend` directory.
+2. Provide standard environment configuration:
     ```env
     MONGODB_URI=mongodb://localhost:27017/dsa_dashboard
     PORT=5000
     ```
-    *(Replace the URI with your MongoDB Atlas connection string if using a cloud database).*
-
-### 2. Backend Setup
-1.  Open a terminal and navigate to the `backend` folder:
-    ```bash
-    cd backend
-    ```
-2.  Install dependencies:
+3. Install dependencies and initialize the server:
     ```bash
     npm install
-    ```
-3.  Start the development server:
-    ```bash
     npm run dev
     ```
-    *The backend will run on `http://localhost:5000`.*
 
-### 3. Frontend Setup
-1.  Open a new terminal window and navigate to the `frontend` folder:
-    ```bash
-    cd frontend
-    ```
-2.  Install dependencies:
+### Frontend Environment Setup
+1. Navigate to the `frontend` directory.
+2. Install dependencies and start the Vite development server:
     ```bash
     npm install
-    ```
-3.  Start the Vite development server:
-    ```bash
     npm run dev
     ```
-    *The frontend will typically run on `http://localhost:5173`.*
-
-## Usage
-1.  Open your browser and navigate to the frontend URL (e.g., `http://localhost:5173`).
-2.  On the Landing Page, enter your usernames for LeetCode, Codeforces, and/or GeeksForGeeks.
-3.  Click "Run configuration" to aggregate your data and view your dashboard metrics!
-4.  Navigate to the "Merge Sort visualizer()" link in the top bar to explore the sorting animation.

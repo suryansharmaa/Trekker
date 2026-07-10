@@ -6,7 +6,6 @@ const MergeSortVisualizer = () => {
   const [speedMs, setSpeedMs] = useState(100);
   const [comparingIndices, setComparingIndices] = useState([]);
 
-  // Store array state history for playback
   const animationQueueRef = useRef([]);
 
   useEffect(() => {
@@ -42,7 +41,6 @@ const MergeSortVisualizer = () => {
       animationQueueRef.current,
     );
 
-    // Playback animations
     for (let i = 0; i < animationQueueRef.current.length; i++) {
       const animation = animationQueueRef.current[i];
 
@@ -63,7 +61,6 @@ const MergeSortVisualizer = () => {
     setIsSorting(false);
   };
 
-  // Helper functions recording steps instead of directly modifying state for visual timing
   const mergeSortHelper = (
     mainArray,
     startIdx,
@@ -144,7 +141,7 @@ const MergeSortVisualizer = () => {
             Algorithm Visualizer
           </h1>
           <p className="text-[#808080] font-mono text-sm">
-            Demonstrating classic Merge Sort Divide and Conquer
+            Demonstrating Merge Sort algorithm
           </p>
         </div>
 
@@ -154,24 +151,22 @@ const MergeSortVisualizer = () => {
             disabled={isSorting}
             className="bg-[#313335] hover:bg-[#3C3F41] border border-[#4e5254] px-4 py-2 rounded font-mono text-sm text-[#A9B7C6] transition-colors disabled:opacity-50"
           >
-            generateNewArray()
+            Reset Data
           </button>
           <button
             onClick={mergeSort}
             disabled={isSorting}
             className="bg-[#629755] hover:bg-[#528246] border border-[#48763f] px-4 py-2 rounded font-mono text-sm text-white transition-colors shadow-sm disabled:opacity-50 flex items-center"
           >
-            <span className="mr-2">▶</span> runSort(MergeSort)
+            <span className="mr-2">▶</span> Run Merge Sort
           </button>
         </div>
       </div>
 
-      {/* Visualization Area */}
       <div className="flex-grow bg-[#313335] rounded-lg border border-[#4e5254] p-4 flex items-end justify-center h-96 shadow-inner overflow-hidden">
         <div className="flex items-end space-x-1 h-full w-full max-w-4xl mx-auto">
           {array.map((value, idx) => {
             const isComparing = comparingIndices.includes(idx);
-            // IDE colors: Blue for default, Orange for active comparison
             const barColor = isComparing ? "bg-[#CC7832]" : "bg-[#467CDA]";
 
             return (

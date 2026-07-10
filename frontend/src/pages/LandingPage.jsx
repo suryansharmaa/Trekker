@@ -36,9 +36,9 @@ const LandingPage = () => {
     <div className="flex-grow flex items-center justify-center">
       <div className="bg-[#313335] p-8 rounded-lg border border-[#4e5254] shadow-2xl w-full max-w-md">
         <div className="mb-8 text-center">
-          <h1 className="text-2xl font-bold text-white mb-2">Enter Details</h1>
+          <h1 className="text-2xl font-bold text-white mb-2">Platform Integration</h1>
           <p className="text-sm text-[#808080]">
-            Enter your competitive programming handles
+            Provide platform handles for data synchronization
           </p>
         </div>
 
@@ -92,7 +92,7 @@ const LandingPage = () => {
             type="submit"
             className="w-full bg-[#365880] hover:bg-[#2F65CA] text-white font-medium py-2 px-4 rounded transition-colors mt-4 shadow-sm border border-[#4e5254]"
           >
-            Enter
+            Synchronize
           </button>
         </form>
       </div>

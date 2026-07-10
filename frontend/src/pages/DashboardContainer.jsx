@@ -20,7 +20,7 @@ const PlatformCard = ({ platform, data, themeColor }) => {
     <div className="bg-[#313335] rounded-lg border border-[#4e5254] overflow-hidden">
       <div className="bg-[#3C3F41] px-4 py-2 border-b border-[#242627] flex items-center justify-between">
         <span className={`font-mono text-sm tracking-wide ${themeColor}`}>
-          {platform}.java
+          {platform}
         </span>
       </div>
       <div className="p-4 space-y-4">
@@ -35,7 +35,6 @@ const PlatformCard = ({ platform, data, themeColor }) => {
           </div>
         </div>
 
-        {/* Difficulty Breakdown */}
         <div className="space-y-2 pt-2 border-t border-[#4e5254]">
           <div className="flex justify-between items-center text-sm">
             <span className="text-[#629755]">Easy</span>
@@ -82,8 +81,9 @@ const DashboardContainer = () => {
     setLoading(true);
     setError("");
     try {
+      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/stats`,
+        `${apiUrl}/api/stats`,
         usernames,
       );
       setStats(response.data);
@@ -104,7 +104,6 @@ const DashboardContainer = () => {
 
   useEffect(() => {
     fetchStats();
-    // eslint-disable-next-line
   }, []);
 
   if (loading) {
@@ -112,7 +111,7 @@ const DashboardContainer = () => {
       <div className="flex-grow flex flex-col items-center justify-center space-y-4">
         <Loader2 className="w-12 h-12 text-[#467CDA] animate-spin" />
         <p className="text-[#A9B7C6] font-mono animate-pulse">
-          Compiling User Data...
+          Aggregating metrics...
         </p>
       </div>
     );
@@ -126,7 +125,7 @@ const DashboardContainer = () => {
           onClick={() => navigate("/")}
           className="mt-4 text-white underline hover:text-gray-300"
         >
-          Return to Configuration
+          Modify Configuration
         </button>
       </div>
     );
@@ -134,7 +133,6 @@ const DashboardContainer = () => {
 
   if (!stats) return null;
 
-  // Aggregate totals
   const totalSolved =
     (stats.leetcode?.totalSolved || 0) +
     (stats.codeforces?.totalSolved || 0) +
@@ -154,11 +152,10 @@ const DashboardContainer = () => {
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
-      {/* Header Section */}
       <div className="flex justify-between items-end border-b border-[#4e5254] pb-4">
         <div>
           <h1 className="text-3xl font-bold text-white mb-1">
-            Project Portfolio
+            Analytics Dashboard
           </h1>
           <p className="text-[#808080] text-sm font-mono">
             Last synced: {new Date(stats.lastUpdated).toLocaleString()}
@@ -173,7 +170,6 @@ const DashboardContainer = () => {
         </button>
       </div>
 
-      {/* Aggregated Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <StatCard
           title="Total Solved"
@@ -185,7 +181,6 @@ const DashboardContainer = () => {
         <StatCard title="Hard" value={totalHard} color="text-[#ED6A5E]" />
       </div>
 
-      {/* Platform Breakdown */}
       <h2 className="text-xl font-bold text-white mt-12 mb-4">
         Platform Modules
       </h2>
@@ -207,7 +202,6 @@ const DashboardContainer = () => {
         />
       </div>
 
-      {/* Milestone Tracker Component */}
       <MilestoneTracker currentSolved={totalSolved} target={400} />
     </div>
   );

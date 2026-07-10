@@ -4,10 +4,9 @@ const MilestoneTracker = ({ currentSolved, target = 600 }) => {
   const percentage = Math.min(100, Math.round((currentSolved / target) * 100));
   const remaining = Math.max(0, target - currentSolved);
 
-  // Darcula colors for the pie chart
   const data = [
-    { name: "Completed", value: currentSolved, color: "#629755" }, // Greenish for progress
-    { name: "Remaining", value: remaining, color: "#313335" }, // Dark grey for background track
+    { name: "Completed", value: currentSolved, color: "#629755" },
+    { name: "Remaining", value: remaining, color: "#313335" },
   ];
 
   return (
@@ -17,20 +16,18 @@ const MilestoneTracker = ({ currentSolved, target = 600 }) => {
           Milestone: {target} Questions
         </h3>
         <p className="text-[#A9B7C6] mb-4">
-          You have conquered{" "}
+          Current progress:{" "}
           <span className="font-bold text-white">{currentSolved}</span> problems
-          across all integrated platforms. Only{" "}
-          <span className="font-bold text-[#ED6A5E]">{remaining}</span> more to
-          hit your next target marker.
+          solved.{" "}
+          <span className="font-bold text-[#ED6A5E]">{remaining}</span> problems
+          remaining until next milestone.
         </p>
 
-        {/* IDE-style Progress Bar */}
         <div className="w-full bg-[#242627] rounded-full h-4 border border-[#4e5254] overflow-hidden relative">
           <div
             className="bg-gradient-to-r from-[#467CDA] to-[#629755] h-full rounded-full transition-all duration-1000 ease-out"
             style={{ width: `${percentage}%` }}
           ></div>
-          {/* Glossy overlay effect to look like old IDE bars */}
           <div className="absolute inset-0 bg-white/10 w-full h-1/2 rounded-t-full"></div>
         </div>
         <div className="flex justify-between mt-2 text-xs font-mono text-[#808080]">
@@ -40,7 +37,6 @@ const MilestoneTracker = ({ currentSolved, target = 600 }) => {
         </div>
       </div>
 
-      {/* Visual Chart Graphic */}
       <div className="w-48 h-48 relative">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
@@ -59,7 +55,6 @@ const MilestoneTracker = ({ currentSolved, target = 600 }) => {
                 <Cell key={`cell-${index}`} fill={entry.color} />
               ))}
             </Pie>
-            {/* Custom IDE styled tooltip */}
             <Tooltip
               contentStyle={{
                 backgroundColor: "#2B2B2B",
