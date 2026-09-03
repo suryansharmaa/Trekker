@@ -1,2 +1,12 @@
 node_modules
 .env
+target/
+*.class
+*.jar
+*.war
+!.mvn/wrapper/maven-wrapper.jar
+.idea/
+*.iml
+.settings/
+.classpath
+.project
